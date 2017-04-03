@@ -1,6 +1,6 @@
 Universe = vanilla
-job = ffZee
-cmd = myJob
+job = minBiasGeneration
+cmd = generateMinBiasToHepMC.exe
 args=$(cluster).$(process)
 # Better not to put logs in the same folder, as they are plenty
 output = minBiasGenerationOutput/$(job)_$(cluster).$(process).out

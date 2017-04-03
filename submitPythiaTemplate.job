@@ -1,6 +1,6 @@
 Universe = vanilla
-job = ffZee
-cmd = myJob
+job = MY_JOB
+cmd = MY_COMMAND
 args=$(cluster).$(process)
 # Better not to put logs in the same folder, as they are plenty
 output = submissionFolder/$(job)_$(cluster).$(process).out
