@@ -9,8 +9,8 @@ log = minBiasGenerationOutput/$(job)_$(cluster).$(process).log
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT_OR_EVICT
 # Needed in case file must be fed in input
-# input	=	mymain00.cmnd
-# transfer_input_files	=	mymain00.cmnd
+input	=	generateMinBiasToHepMC.cmnd
+transfer_input_files	=	generateMinBiasToHepMC.cmnd
 
 
 request_cpus = 1
