@@ -44,7 +44,7 @@ int main(int argc, char * argv[]) {
 
   Pythia8::Pythia pythia;
   HepMC::Pythia8ToHepMC ToHepMC;
-  std::string hepMCFileName = "minBiasEvents/minBias_";
+  std::string hepMCFileName = "/software/sb17498/pythia8223/mystuff/minBiasEvents/minBias_";
   hepMCFileName.append(fileSuffix);
   hepMCFileName.append(".dat");
   HepMC::IO_GenEvent ascii_io(hepMCFileName.c_str(), std::ios::out);
