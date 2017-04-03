@@ -1,6 +1,6 @@
 #! /bin/bash
 
-g++ $1 /software/sb17498/pythia8223/lib/libpythia8.a -o mymain00 -I/software/sb17498/hepmcInstall//include -I/software/sb17498/pythia8223/include -O2 -ansi -pedantic -W -Wall -Wshadow -fPIC -Wl,-rpath,/software/sb17498/pythia8223/lib -ldl \
+g++ $1 /software/sb17498/pythia8223/lib/libpythia8.a -o $1.exe -I/software/sb17498/hepmcInstall//include -I/software/sb17498/pythia8223/include -O2 -ansi -pedantic -W -Wall -Wshadow -fPIC -Wl,-rpath,/software/sb17498/pythia8223/lib -ldl \
 	 -L/software/sb17498/hepmcInstall//lib -Wl,-rpath,/software/sb17498/hepmcInstall//lib -lHepMC\
 	 -I./ -I/software/sb17498/pythia8223/include -O2 -ansi -pedantic -W -Wall -Wshadow -fPIC -Wl,-rpath,/software/sb17498/pythia8223/lib -ldl 
 	 #-pthread -m32 -I/software/root/v5.34.25/include \
