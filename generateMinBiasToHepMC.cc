@@ -15,8 +15,6 @@ int main(int argc, char * argv[]) {
   // -c -> command file
   // -n -> .dat file name suffix for unique output identification
 
-  std::istringstream inputHandler;
-
   std::string cmndFileName;
   std::string fileSuffix;
 
@@ -25,16 +23,11 @@ int main(int argc, char * argv[]) {
   while ((c = getopt (argc, argv, "cn")) != -1)
   switch (c)
   {
-    case 'c':
-      std::cout << optind << "\t" << argv[optind] << std::endl;
-      inputHandler >> cmndFileName;
-      inputHandler.str(argv[optind]);
+    case 'c':      
       cmndFileName = argv[optind];
       break;
     
     case 'n':
-      std::cout << optind << "\t" << argv[optind] << std::endl;
-      inputHandler.str(argv[optind]);
       fileSuffix = argv[optind];
       break;
 

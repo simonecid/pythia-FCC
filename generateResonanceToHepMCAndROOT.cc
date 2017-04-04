@@ -16,77 +16,69 @@ int main(int argc, char * argv[]) {
   // Generator. Process selection. LHC initialization. Histogram.
 
   // -c -> command file
-  // -n -> process number for unique output identification
+  // -o -> process number for unique output identification
 
-  while ((c = getopt (argc, argv, ":")) != -1)
+  std::string cmndFileName;
+  std::string outputFileName;
+
+  int c;
+
+  while ((c = getopt (argc, argv, "co")) != -1)
   switch (c)
-    {
-    case 'a':
-      aflag = 1;
+  {
+    case 'c':      
+      cmndFileName = argv[optind];
       break;
-    case 'b':
-      bflag = 1;
+    
+    case 'o':
+      outputFileName = argv[optind];
       break;
-    case 'c':
-      cvalue = optarg;
-      break;
-    case '?':
-      if (optopt == 'c')
-        fprintf (stderr, "Option -%c requires an argument.\n", optopt);
-      else if (isprint (optopt))
-        fprintf (stderr, "Unknown option `-%c'.\n", optopt);
-      else
-        fprintf (stderr,
-                  "Unknown option character `\\x%x'.\n",
-                  optopt);
-      return 1;
+
     default:
       abort ();
-    }
+  }
 
   Pythia8::Pythia pythia;
   HepMC::Pythia8ToHepMC ToHepMC;
-  std::string hepMCFileName = "myhepmc_";
-  hepMCFileName.append(argv[1]);
+  std::string hepMCFileName = outputFileName;
   hepMCFileName.append(".dat");
   HepMC::IO_GenEvent ascii_io(hepMCFileName.c_str(), std::ios::out);
-  pythia.readFile("mymain00.cmnd");
+  pythia.readFile(cmndFileName.c_str());
   pythia.init();
 
   struct Particle resonanceToSave, decayProductsToSave[2];
 
   int nEvents = pythia.mode("Main:numberOfEvents");
 
-  std::string rootFileName = "resonanceData_";
-  rootFileName.append(argv[1]);
+  std::string rootFileName = outputFileName;
   rootFileName.append(".root");
-  //TFile *myFile = TFile::Open(rootFileName.c_str(), "RECREATE");
+  TFile *myFile = TFile::Open(rootFileName.c_str(), "RECREATE");
 
-  //TTree *tree = new TTree("resonanceDecays","Resonance two-particle decays");
+  TTree *tree = new TTree("resonanceDecays","Resonance two-particle decays");
 
-  // Z0 Boson
-  //tree->Branch("resonancePx",&resonanceToSave.px,"resonancePx/D");
-  //tree->Branch("resonancePy",&resonanceToSave.py,"resonancePy/D");
-  //tree->Branch("resonancePz",&resonanceToSave.pz,"resonancePz/D");
-  //tree->Branch("resonanceE",&resonanceToSave.E,"resonanceE/D");
-  //tree->Branch("resonanceEta",&resonanceToSave.eta,"resonanceEta/D");
-  //tree->Branch("resonancePhi",&resonanceToSave.phi,"resonancePhi/D");
+  // Resonance
+  tree -> Branch("resonancePx",&resonanceToSave.px,"resonancePx/D");
+  tree -> Branch("resonancePy",&resonanceToSave.py,"resonancePy/D");
+  tree -> Branch("resonancePz",&resonanceToSave.pz,"resonancePz/D");
+  tree -> Branch("resonanceE",&resonanceToSave.E,"resonanceE/D");
+  tree -> Branch("resonanceEta",&resonanceToSave.eta,"resonanceEta/D");
+  tree -> Branch("resonancePhi",&resonanceToSave.phi,"resonancePhi/D");
   
   // First decay product
-  //tree->Branch("decay1Px",&decayProductsToSave[0].px,"decay1Px/D");
-  //tree->Branch("decay1Py",&decayProductsToSave[0].py,"decay1Py/D");
-  //tree->Branch("decay1Pz",&decayProductsToSave[0].pz,"decay1Pz/D");
-  //tree->Branch("decay1E",&decayProductsToSave[0].E,"decay1E/D");
-  //tree->Branch("decay1Eta",&decayProductsToSave[0].eta,"decay1Eta/D");
-  //tree->Branch("decay1Phi",&decayProductsToSave[0].phi,"decay1Phi/D");
+  tree -> Branch("decay1Px",&decayProductsToSave[0].px,"decay1Px/D");
+  tree -> Branch("decay1Py",&decayProductsToSave[0].py,"decay1Py/D");
+  tree -> Branch("decay1Pz",&decayProductsToSave[0].pz,"decay1Pz/D");
+  tree -> Branch("decay1E",&decayProductsToSave[0].E,"decay1E/D");
+  tree -> Branch("decay1Eta",&decayProductsToSave[0].eta,"decay1Eta/D");
+  tree -> Branch("decay1Phi",&decayProductsToSave[0].phi,"decay1Phi/D");
 
   // Second decay product  
-  //tree->Branch("decay2Px",&decayProductsToSave[1].px,"decay2Px/D");
-  //tree->Branch("decay2Py",&decayProductsToSave[1].py,"decay2Py/D");
-  //tree->Branch("decay2Pz",&decayProductsToSave[1].pz,"decay2Pz/D");
-  //tree->Branch("decay2E",&decayProductsToSave[1].E,"decay2E/D");
-  //tree->Branch("decay2Eta",&decayProductsToSave[1].eta,"decay2Eta/D");
-  //tree->Branch("decay2Phi",&decayProductsToSave[1].phi,"decay2Phi/D");
+  tree -> Branch("decay2Px",&decayProductsToSave[1].px,"decay2Px/D");
+  tree -> Branch("decay2Py",&decayProductsToSave[1].py,"decay2Py/D");
+  tree -> Branch("decay2Pz",&decayProductsToSave[1].pz,"decay2Pz/D");
+  tree -> Branch("decay2E",&decayProductsToSave[1].E,"decay2E/D");
+  tree -> Branch("decay2Eta",&decayProductsToSave[1].eta,"decay2Eta/D");
+  tree -> Branch("decay2Phi",&decayProductsToSave[1].phi,"decay2Phi/D");
 
   // Begin event loop. Generate event. Skip if error. List first one.
   for (int iEvent = 0; iEvent < nEvents; ++iEvent) {
@@ -126,7 +118,7 @@ int main(int argc, char * argv[]) {
         //double invariantMass = Pythia8::m(momentums[0], momentums[1]);
         //std::cout << "\t\t -> Mass is " << invariantMass << " GeV" << std::endl;
 
-        //tree->Fill();
+        tree -> Fill();
         
       }
 
@@ -144,8 +136,8 @@ int main(int argc, char * argv[]) {
   }
   pythia.stat();
 
-  //tree -> Write();
-  //delete myFile;
+  tree -> Write();
+  delete myFile;
 
   return 0;
   
