@@ -23,14 +23,16 @@ int main(int argc, char * argv[])
   // -c -> command file
   // -o -> ID for unique output identification
   // -r -> resonanceId (absolute value will be taken)
+  // -n -> number of events to generate (facultative)
 
   std::string cmndFileName;
   std::string outputFileName;
   int resonancePDGID;
+  int nEvents = 0;
 
   int c;
 
-  while ((c = getopt (argc, argv, "cor")) != -1)
+  while ((c = getopt (argc, argv, "corn")) != -1)
   switch (c)
   {
     case 'c':      
@@ -51,6 +53,15 @@ int main(int argc, char * argv[])
       converter.str(resonancePDGID_str);
       converter >> resonancePDGID;
       break;
+    }
+    case 'n':
+    {
+      std::string nEvents_str;
+      nEvents_str = argv[optind];
+      std::istringstream converter;
+      converter.str(nEvents_str);
+      converter >> nEvents;
+      break;
     } 
     default:
     {
@@ -68,7 +79,7 @@ int main(int argc, char * argv[])
 
   struct Particle resonanceToSave, decayProductsToSave[2];
 
-  int nEvents = pythia.mode("Main:numberOfEvents");
+  if (nEvents == 0) nEvents = pythia.mode("Main:numberOfEvents");
 
   std::string rootFileName = outputFileName;
   rootFileName.append(".root");
