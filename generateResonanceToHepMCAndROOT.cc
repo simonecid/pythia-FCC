@@ -21,7 +21,7 @@ int main(int argc, char * argv[])
   // Generator. Process selection. LHC initialization. Histogram.
 
   // -c -> command file
-  // -o -> process number for unique output identification
+  // -o -> ID for unique output identification
   // -r -> resonanceId (absolute value will be taken)
 
   std::string cmndFileName;
