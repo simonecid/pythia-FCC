@@ -6,36 +6,56 @@
 #include "TTree.h"
 #include <string>
 #include <unistd.h> //getopt
+#include <sstream> 
+#include <cstdlib>
 
-struct Particle {
+struct Particle
+{
   double px, py, pz, E, eta, phi;
+  int pdgid;
 };
 
 //using namespace Pythia8;
-int main(int argc, char * argv[]) {
+int main(int argc, char * argv[]) 
+{
   // Generator. Process selection. LHC initialization. Histogram.
 
   // -c -> command file
   // -o -> process number for unique output identification
+  // -r -> resonanceId (absolute value will be taken)
 
   std::string cmndFileName;
   std::string outputFileName;
+  int resonancePDGID;
 
   int c;
 
-  while ((c = getopt (argc, argv, "co")) != -1)
+  while ((c = getopt (argc, argv, "cor")) != -1)
   switch (c)
   {
     case 'c':      
+    {
       cmndFileName = argv[optind];
       break;
-    
+    }
     case 'o':
+    {
       outputFileName = argv[optind];
       break;
-
+    }
+    case 'r':
+    {
+      std::string resonancePDGID_str;
+      resonancePDGID_str = argv[optind];
+      std::istringstream converter;
+      converter.str(resonancePDGID_str);
+      converter >> resonancePDGID;
+      break;
+    } 
     default:
+    {
       abort ();
+    }
   }
 
   Pythia8::Pythia pythia;
@@ -63,6 +83,7 @@ int main(int argc, char * argv[]) {
   tree -> Branch("resonanceE",&resonanceToSave.E,"resonanceE/D");
   tree -> Branch("resonanceEta",&resonanceToSave.eta,"resonanceEta/D");
   tree -> Branch("resonancePhi",&resonanceToSave.phi,"resonancePhi/D");
+  tree -> Branch("resonancePDGID",&resonanceToSave.pdgid,"resonancePDGID/I");
   
   // First decay product
   tree -> Branch("decay1Px",&decayProductsToSave[0].px,"decay1Px/D");
@@ -71,6 +92,7 @@ int main(int argc, char * argv[]) {
   tree -> Branch("decay1E",&decayProductsToSave[0].E,"decay1E/D");
   tree -> Branch("decay1Eta",&decayProductsToSave[0].eta,"decay1Eta/D");
   tree -> Branch("decay1Phi",&decayProductsToSave[0].phi,"decay1Phi/D");
+  tree -> Branch("decay1PDGID",&decayProductsToSave[0].pdgid,"decay1PDGID/I");
 
   // Second decay product  
   tree -> Branch("decay2Px",&decayProductsToSave[1].px,"decay2Px/D");
@@ -79,14 +101,18 @@ int main(int argc, char * argv[]) {
   tree -> Branch("decay2E",&decayProductsToSave[1].E,"decay2E/D");
   tree -> Branch("decay2Eta",&decayProductsToSave[1].eta,"decay2Eta/D");
   tree -> Branch("decay2Phi",&decayProductsToSave[1].phi,"decay2Phi/D");
+  tree -> Branch("decay2PDGID",&decayProductsToSave[1].pdgid,"decay2PDGID/I");
 
   // Begin event loop. Generate event. Skip if error. List first one.
-  for (int iEvent = 0; iEvent < nEvents; ++iEvent) {
+  for (int iEvent = 0; iEvent < nEvents; ++iEvent) 
+  {
     if (!pythia.next()) continue;
     // Loop over particles in event. Find last Z0 copy. Fill its pT.
     //int iZ = 0;
-    for (int i = 0; i < pythia.event.size(); ++i) {
-      if (pythia.event[i].id() == 23) {
+    for (int i = 0; i < pythia.event.size(); ++i) 
+    {
+      if (abs(pythia.event[i].id()) == abs(resonancePDGID)) 
+      {
         const Pythia8::Particle * resonance = & pythia.event[i];
         //iZ = i;
         //std::cout << "Particle id: " << resonance -> id() << " with 4-p: " << resonance -> e() << " " << resonance -> px() << " " << resonance -> py() << " " << resonance -> pz() << std::endl;          
@@ -100,6 +126,7 @@ int main(int argc, char * argv[]) {
         resonanceToSave.E = resonance -> e();
         resonanceToSave.eta = resonance -> eta();
         resonanceToSave.phi = resonance -> phi();
+        resonanceToSave.pdgid = resonance -> id();
 
         for (unsigned int x = 0; x < numberOfDaughters; x++) {
           int daughterIdx = resonance -> daughterList()[x];
@@ -113,6 +140,7 @@ int main(int argc, char * argv[]) {
           decayProductsToSave[x].E = resonanceProduct -> e();
           decayProductsToSave[x].eta = resonanceProduct -> eta();
           decayProductsToSave[x].phi = resonanceProduct -> phi();
+          decayProductsToSave[x].pdgid = resonanceProduct -> id();
 
         }
         //double invariantMass = Pythia8::m(momentums[0], momentums[1]);
