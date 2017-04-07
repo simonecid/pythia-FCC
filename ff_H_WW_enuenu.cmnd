@@ -21,10 +21,22 @@ Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
 Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
 Beams:eCM = 100000.                ! CM energy of collision
 
-! 4) Turning on W generation
+! 4) Turning on Z generation
 
 HiggsSM:all = on
 
+! H -> W+ W-
 25:oneChannel = 1 1 0 -24 +24
-PhaseSpace:mHatMin = 100.
-PhaseSpace:mHatMax = 150.
+! W+ -> e+ nu_e
+24:oneChannel = 1 1 0 -11 12
+! W- -> e- antinu_e
+-24:oneChannel = 1 1 0 11 -12
+
+! No phase space cuts
+PhaseSpace:mHatMin = 4.
+PhaseSpace:mHatMax = -1.
+
+! 5) Random number generation setup
+
+Random:setSeed = on
+Random:seed = 0
