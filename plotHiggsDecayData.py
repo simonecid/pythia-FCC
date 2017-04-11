@@ -218,6 +218,7 @@ leg3.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_LeptonPtHistogramComparison.png", "png")
 
+# Eta distributions
 higgsEtaHisto.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_higgsEtaHisto.png", "png")
@@ -228,7 +229,7 @@ chargedLeptonEtaHisto.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_ChargedLeptonEtaHisto.png", "png")
 
-
+# Phi distributions
 higgsPhiHisto.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_higgsPhiHisto.png", "png")
