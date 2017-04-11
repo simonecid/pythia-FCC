@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from ROOT import TFile
 from ROOT import TTree
 from ROOT import TH1I
