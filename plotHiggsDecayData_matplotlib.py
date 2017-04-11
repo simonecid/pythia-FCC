@@ -143,51 +143,79 @@ for eventIndex in xrange(0, numberOfEntries):
   if isLepton3Charged : chargedLeptonPhiData.append(lepton3Phi)
   if isLepton4Charged : chargedLeptonPhiData.append(lepton4Phi)
 
-
-#canvas = TCanvas("c1", "canvas")
-#
-#canvas.SetWindowSize(1024, 768)
-
-#TODO: FINISH ADAPTING STUFF, missing N patches to the declaration
+higgsPtCanvas = plt.figure()
+# plotter goes here! higgsPt = plt.figure()
+ewBosonPtCanvas = plt.figure()
+# plotter goes here! ewBosonPt = plt.figure()
+ewBosonLeadingPtCanvas = plt.figure()
+# plotter goes here! ewBosonLeadingPt = plt.figure()
+ewBosonSubLeadingPtCanvas = plt.figure()
+# plotter goes here! ewBosonSubLeadingPt = plt.figure()
+ewBoson1PtCanvas = plt.figure()
+# plotter goes here! ewBoson1Pt = plt.figure()
+ewBoson2PtCanvas = plt.figure()
+# plotter goes here! ewBoson2Pt = plt.figure()
+chargedLeptonPtCanvas = plt.figure()
+# plotter goes here! chargedLeptonPt = plt.figure()
+neutralLeptonPtCanvas = plt.figure()
+# plotter goes here! neutralLeptonPt = plt.figure()
+lepton1PtCanvas = plt.figure()
+# plotter goes here! lepton1Pt = plt.figure()
+lepton2PtCanvas = plt.figure()
+# plotter goes here! lepton2Pt = plt.figure()
+lepton3PtCanvas = plt.figure()
+# plotter goes here! lepton3Pt = plt.figure()
+lepton4PtCanvas = plt.figure()
+# plotter goes here! lepton4Pt = plt.figure()
+higgsEtaCanvas = plt.figure()
+# plotter goes here! higgsEta = plt.figure()
+ewBosonEtaCanvas = plt.figure()
+# plotter goes here! ewBosonEta = plt.figure()
+chargedLeptonEtaCanvas = plt.figure()
+# plotter goes here! chargedLeptonEta = plt.figure()
+higgsPhiCanvas = plt.figure()
+# plotter goes here! higgsPhi = plt.figure()
+ewBosonPhiCanvas = plt.figure()
+# plotter goes here! ewBosonPhi = plt.figure()
+chargedLeptonPhiCanvas = plt.figure()
+# plotter goes here! chargedLeptonPhi = plt.figure()
 
 ''' Histogram with the pt distribution of the Higgs bosons'''
-higgsPtHisto = plt.hist(higgsPtData, bins=100, histtype="step") #"Higgs pt distribution", 100, 0, 500)
+higgsPtN, higgsPtBins, higgsPtPatches = plt.hist(higgsPtData, bins=100, histtype="step") #"Higgs pt distribution", 100, 0, 500)
 ''' Histogram with the Cumulative pt distribution of both EW bosons'''
-ewBosonPtHisto = plt.hist(ewBosonPtData, bins=100, histtype="step") #"EW Bosons pt distribution", 100, 0, 500)
+ewBosonPtN, ewBosonPtBins, ewBosonPtPatches = plt.hist(ewBosonPtData, bins=100, histtype="step") #"EW Bosons pt distribution", 100, 0, 500)
 ''' Histogram with the Leading pt distribution of EW bosons'''
-ewBosonLeadingPtHisto = plt.hist(ewBosonLeadingPtData, bins=100, histtype="step") #"EW Boson leading pt distribution", 100, 0, 500)
+ewBosonLeadingPtN, ewBosonLeadingPtBins, ewBosonLeadingPtPatches = plt.hist(ewBosonLeadingPtData, bins=100, histtype="step") #"EW Boson leading pt distribution", 100, 0, 500)
 ''' Histogram with the Sub-leading pt distribution of EW bosons'''
-ewBosonSubLeadingPtHisto = plt.hist(ewBosonSubLeadingPtData, bins=100, histtype="step") #"EW Boson sub-leading pt distribution", 100, 0, 500)
+ewBosonSubLeadingPtN, ewBosonSubLeadingPtBins, ewBosonSubLeadingPtPatches = plt.hist(ewBosonSubLeadingPtData, bins=100, histtype="step") #"EW Boson sub-leading pt distribution", 100, 0, 500)
 ''' Histogram with the Plot of the distribution of the pt of one the two EW boson, to check that everything is working fine'''
-ewBoson1PtHisto = plt.hist(ewBoson1PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
+ewBoson1PtN, ewBoson1PtBins, ewBoson1PtPatches = plt.hist(ewBoson1PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
 ''' Histogram with the Plot of the distribution of the pt of one the two EW boson, to check that everything is working fine'''
-ewBoson2PtHisto = plt.hist(ewBoson2PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
+ewBoson2PtN, ewBoson2PtBins, ewBoson2PtPatches = plt.hist(ewBoson2PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
 ''' Histogram with the Cumulative plot of the distribution of the pt of every charged lepton'''
-chargedLeptonPtHisto = plt.hist(chargedLeptonPtData, bins=100, histtype="step") #"Charged leptons pt distribution", 100, 0, 500)
+chargedLeptonPtN, chargedLeptonPtBins, chargedLeptonPtPatches = plt.hist(chargedLeptonPtData, bins=100, histtype="step") #"Charged leptons pt distribution", 100, 0, 500)
 ''' Histogram with the Cumulative plot of the distribution of the pt of every neutral lepton'''
-neutralLeptonPtHisto = plt.hist(neutralLeptonPtData, bins=100, histtype="step") #"Neutral leptons pt distribution", 100, 0, 500)
+neutralLeptonPtN, neutralLeptonPtBins, neutralLeptonPtPatches = plt.hist(neutralLeptonPtData, bins=100, histtype="step") #"Neutral leptons pt distribution", 100, 0, 500)
 ''' Histogram with the the distribution of the pt of a lepton'''
-lepton1PtHisto = plt.hist(lepton1PtData, bins=100, histtype="step") #"Lepton 1 pt distribution", 100, 0, 500)
+lepton1PtN, lepton1PtBins, lepton1PtPatches = plt.hist(lepton1PtData, bins=100, histtype="step") #"Lepton 1 pt distribution", 100, 0, 500)
 ''' Histogram with the the distribution of the pt of a lepton'''
-lepton2PtHisto = plt.hist(lepton2PtData, bins=100, histtype="step") #"Lepton 2 pt distribution", 100, 0, 500)
+lepton2PtN, lepton2PtBins, lepton2PtPatches = plt.hist(lepton2PtData, bins=100, histtype="step") #"Lepton 2 pt distribution", 100, 0, 500)
 ''' Histogram with the distribution of the pt of a lepton'''
-lepton3PtHisto = plt.hist(lepton3PtData, bins=100, histtype="step") #"Lepton 3 pt distribution", 100, 0, 500)
+lepton3PtN, lepton3PtBins, lepton3PtPatches = plt.hist(lepton3PtData, bins=100, histtype="step") #"Lepton 3 pt distribution", 100, 0, 500)
 ''' Histogram with the distribution of the pt of a lepton'''
-lepton4PtHisto = plt.hist(lepton4PtData, bins=100, histtype="step") #"Lepton 4 pt distribution", 100, 0, 500)
+lepton4PtN, lepton4PtBins, lepton4PtPatches = plt.hist(lepton4PtData, bins=100, histtype="step") #"Lepton 4 pt distribution", 100, 0, 500)
 ''' Histogram with the Eta distribution of the Higgs bosons'''
-higgsEtaHisto = plt.hist(higgsEtaData, bins=100, histtype="step") #"higgs eta distribution", 100, -10, +10)
+higgsEtaN, higgsEtaBins, higgsEtaPatches = plt.hist(higgsEtaData, bins=100, histtype="step") #"higgs eta distribution", 100, -10, +10)
 ''' Histogram with the Cumulative eta distribution of both EW bosons'''
-ewBosonEtaHisto = plt.hist(ewBosonEtaData, bins=100, histtype="step") #"EW Boson eta distribution", 100, -10, +10)
+ewBosonEtaN, ewBosonEtaBins, ewBosonEtaPatches = plt.hist(ewBosonEtaData, bins=100, histtype="step") #"EW Boson eta distribution", 100, -10, +10)
 ''' Histogram with the Cumulative eta distribution of both charged leptons'''
-chargedLeptonEtaHisto = plt.hist(chargedLeptonEtaData, bins=100, histtype="step") #"Charged leptons eta distribution", 100, -10, +10)
+chargedLeptonEtaN, chargedLeptonEtaBins, chargedLeptonEtaPatches = plt.hist(chargedLeptonEtaData, bins=100, histtype="step") #"Charged leptons eta distribution", 100, -10, +10)
 ''' Histogram with the Phi distribution of the Higgs bosons'''
-higgsPhiHisto = plt.hist(higgsPhiData, bins=100, histtype="step") #"Higgs phi distribution", 110, -3.30, +3.30)
+higgsPhiN, higgsPhiBins, higgsPhiPatches = plt.hist(higgsPhiData, bins=100, histtype="step") #"Higgs phi distribution", 110, -3.30, +3.30)
 ''' Histogram with the Cumulative phi distribution of both EW bosons'''
-ewBosonPhiHisto = plt.hist(ewBosonPhiData, bins=100, histtype="step") #"EW Boson phi distribution", 110, -3.30, +3.30)
+ewBosonPhiN, ewBosonPhiBins, ewBosonPhiPatches = plt.hist(ewBosonPhiData, bins=100, histtype="step") #"EW Boson phi distribution", 110, -3.30, +3.30)
 ''' Histogram with the Cumulative phi distribution of both charged leptons'''
-chargedLeptonPhiHisto = plt.hist(chargedLeptonPhiData, bins=100, histtype="step") #"Charged leptons phi distribution", 110, -3.30, +3.30)
-
-# pt stuff
+chargedLeptonPhiN, chargedLeptonPhiBins, chargedLeptonPhiPatches = plt.hist(chargedLeptonPhiData, bins=100, histtype="step") #"Charged leptons phi distribution", 110, -3.30, +3.30)
 
 canvas.SetLogy()
 higgsPtHisto.Draw()
