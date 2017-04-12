@@ -12,6 +12,9 @@ from sys import argv
 import matplotlib.pyplot as plt
 import numpy as np
 
+plt.rc('text', usetex=True)
+plt.rc('font', family='serif')
+
 fileName = argv[1]
 higgsFile = TFile(argv[1] + ".root")
 higgsDecaysTree = higgsFile.Get("higgsDecays")
@@ -144,78 +147,173 @@ for eventIndex in xrange(0, numberOfEntries):
   if isLepton4Charged : chargedLeptonPhiData.append(lepton4Phi)
 
 higgsPtCanvas = plt.figure()
-# plotter goes here! higgsPt = plt.figure()
+higgsPtPlot = higgsPtCanvas.add_subplot(1, 1, 1)
 ewBosonPtCanvas = plt.figure()
-# plotter goes here! ewBosonPt = plt.figure()
+ewBosonPtPlot = ewBosonPtCanvas.add_subplot(1, 1, 1)
 ewBosonLeadingPtCanvas = plt.figure()
-# plotter goes here! ewBosonLeadingPt = plt.figure()
+ewBosonLeadingPtPlot = ewBosonLeadingPtCanvas.add_subplot(1, 1, 1)
 ewBosonSubLeadingPtCanvas = plt.figure()
-# plotter goes here! ewBosonSubLeadingPt = plt.figure()
+ewBosonSubLeadingPtPlot = ewBosonSubLeadingPtCanvas.add_subplot(1, 1, 1)
 ewBoson1PtCanvas = plt.figure()
-# plotter goes here! ewBoson1Pt = plt.figure()
+ewBoson1PtPlot = ewBoson1PtCanvas.add_subplot(1, 1, 1)
 ewBoson2PtCanvas = plt.figure()
-# plotter goes here! ewBoson2Pt = plt.figure()
+ewBoson2PtPlot = ewBoson2PtCanvas.add_subplot(1, 1, 1)
 chargedLeptonPtCanvas = plt.figure()
-# plotter goes here! chargedLeptonPt = plt.figure()
+chargedLeptonPtPlot = chargedLeptonPtCanvas.add_subplot(1, 1, 1)
 neutralLeptonPtCanvas = plt.figure()
-# plotter goes here! neutralLeptonPt = plt.figure()
+neutralLeptonPtPlot = neutralLeptonPtCanvas.add_subplot(1, 1, 1)
 lepton1PtCanvas = plt.figure()
-# plotter goes here! lepton1Pt = plt.figure()
+lepton1PtPlot = lepton1PtCanvas.add_subplot(1, 1, 1)
 lepton2PtCanvas = plt.figure()
-# plotter goes here! lepton2Pt = plt.figure()
+lepton2PtPlot = lepton2PtCanvas.add_subplot(1, 1, 1)
 lepton3PtCanvas = plt.figure()
-# plotter goes here! lepton3Pt = plt.figure()
+lepton3PtPlot = lepton3PtCanvas.add_subplot(1, 1, 1)
 lepton4PtCanvas = plt.figure()
-# plotter goes here! lepton4Pt = plt.figure()
+lepton4PtPlot = lepton4PtCanvas.add_subplot(1, 1, 1)
 higgsEtaCanvas = plt.figure()
-# plotter goes here! higgsEta = plt.figure()
+higgsEtaPlot = higgsEtaCanvas.add_subplot(1, 1, 1)
 ewBosonEtaCanvas = plt.figure()
-# plotter goes here! ewBosonEta = plt.figure()
+ewBosonEtaPlot = ewBosonEtaCanvas.add_subplot(1, 1, 1)
 chargedLeptonEtaCanvas = plt.figure()
-# plotter goes here! chargedLeptonEta = plt.figure()
+chargedLeptonEtaPlot = chargedLeptonEtaCanvas.add_subplot(1, 1, 1)
 higgsPhiCanvas = plt.figure()
-# plotter goes here! higgsPhi = plt.figure()
+higgsPhiPlot = higgsPhiCanvas.add_subplot(1, 1, 1)
 ewBosonPhiCanvas = plt.figure()
-# plotter goes here! ewBosonPhi = plt.figure()
+ewBosonPhiPlot = ewBosonPhiCanvas.add_subplot(1, 1, 1)
 chargedLeptonPhiCanvas = plt.figure()
-# plotter goes here! chargedLeptonPhi = plt.figure()
+chargedLeptonPhiPlot = chargedLeptonPhiCanvas.add_subplot(1, 1, 1)
 
 ''' Histogram with the pt distribution of the Higgs bosons'''
-higgsPtN, higgsPtBins, higgsPtPatches = plt.hist(higgsPtData, bins=100, histtype="step") #"Higgs pt distribution", 100, 0, 500)
+higgsPtN, higgsPtBins, higgsPtPatches = higgsPtPlot.hist(higgsPtData, bins=100, histtype="step")
 ''' Histogram with the Cumulative pt distribution of both EW bosons'''
-ewBosonPtN, ewBosonPtBins, ewBosonPtPatches = plt.hist(ewBosonPtData, bins=100, histtype="step") #"EW Bosons pt distribution", 100, 0, 500)
+ewBosonPtN, ewBosonPtBins, ewBosonPtPatches = ewBosonPtPlot.hist(ewBosonPtData, bins=100, histtype="step")
 ''' Histogram with the Leading pt distribution of EW bosons'''
-ewBosonLeadingPtN, ewBosonLeadingPtBins, ewBosonLeadingPtPatches = plt.hist(ewBosonLeadingPtData, bins=100, histtype="step") #"EW Boson leading pt distribution", 100, 0, 500)
+ewBosonLeadingPtN, ewBosonLeadingPtBins, ewBosonLeadingPtPatches = ewBosonLeadingPtPlot.hist(ewBosonLeadingPtData, bins=100, histtype="step") 
 ''' Histogram with the Sub-leading pt distribution of EW bosons'''
-ewBosonSubLeadingPtN, ewBosonSubLeadingPtBins, ewBosonSubLeadingPtPatches = plt.hist(ewBosonSubLeadingPtData, bins=100, histtype="step") #"EW Boson sub-leading pt distribution", 100, 0, 500)
+ewBosonSubLeadingPtN, ewBosonSubLeadingPtBins, ewBosonSubLeadingPtPatches = ewBosonSubLeadingPtPlot.hist(ewBosonSubLeadingPtData, bins=100, histtype="step")
 ''' Histogram with the Plot of the distribution of the pt of one the two EW boson, to check that everything is working fine'''
-ewBoson1PtN, ewBoson1PtBins, ewBoson1PtPatches = plt.hist(ewBoson1PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
+ewBoson1PtN, ewBoson1PtBins, ewBoson1PtPatches = ewBoson1PtPlot.hist(ewBoson1PtData, bins=100, histtype="step") 
 ''' Histogram with the Plot of the distribution of the pt of one the two EW boson, to check that everything is working fine'''
-ewBoson2PtN, ewBoson2PtBins, ewBoson2PtPatches = plt.hist(ewBoson2PtData, bins=100, histtype="step") #"EW Boson pt distribution", 100, 0, 500)
+ewBoson2PtN, ewBoson2PtBins, ewBoson2PtPatches = ewBoson2PtPlot.hist(ewBoson2PtData, bins=100, histtype="step") 
 ''' Histogram with the Cumulative plot of the distribution of the pt of every charged lepton'''
-chargedLeptonPtN, chargedLeptonPtBins, chargedLeptonPtPatches = plt.hist(chargedLeptonPtData, bins=100, histtype="step") #"Charged leptons pt distribution", 100, 0, 500)
+chargedLeptonPtN, chargedLeptonPtBins, chargedLeptonPtPatches = chargedLeptonPtPlot.hist(chargedLeptonPtData, bins=100, histtype="step") 
 ''' Histogram with the Cumulative plot of the distribution of the pt of every neutral lepton'''
-neutralLeptonPtN, neutralLeptonPtBins, neutralLeptonPtPatches = plt.hist(neutralLeptonPtData, bins=100, histtype="step") #"Neutral leptons pt distribution", 100, 0, 500)
+neutralLeptonPtN, neutralLeptonPtBins, neutralLeptonPtPatches = neutralLeptonPtPlot.hist(neutralLeptonPtData, bins=100, histtype="step") 
 ''' Histogram with the the distribution of the pt of a lepton'''
-lepton1PtN, lepton1PtBins, lepton1PtPatches = plt.hist(lepton1PtData, bins=100, histtype="step") #"Lepton 1 pt distribution", 100, 0, 500)
+lepton1PtN, lepton1PtBins, lepton1PtPatches = lepton1PtPlot.hist(lepton1PtData, bins=100, histtype="step") 
 ''' Histogram with the the distribution of the pt of a lepton'''
-lepton2PtN, lepton2PtBins, lepton2PtPatches = plt.hist(lepton2PtData, bins=100, histtype="step") #"Lepton 2 pt distribution", 100, 0, 500)
+lepton2PtN, lepton2PtBins, lepton2PtPatches = lepton2PtPlot.hist(lepton2PtData, bins=100, histtype="step") 
 ''' Histogram with the distribution of the pt of a lepton'''
-lepton3PtN, lepton3PtBins, lepton3PtPatches = plt.hist(lepton3PtData, bins=100, histtype="step") #"Lepton 3 pt distribution", 100, 0, 500)
+lepton3PtN, lepton3PtBins, lepton3PtPatches = lepton3PtPlot.hist(lepton3PtData, bins=100, histtype="step") 
 ''' Histogram with the distribution of the pt of a lepton'''
-lepton4PtN, lepton4PtBins, lepton4PtPatches = plt.hist(lepton4PtData, bins=100, histtype="step") #"Lepton 4 pt distribution", 100, 0, 500)
+lepton4PtN, lepton4PtBins, lepton4PtPatches = lepton4PtPlot.hist(lepton4PtData, bins=100, histtype="step") 
 ''' Histogram with the Eta distribution of the Higgs bosons'''
-higgsEtaN, higgsEtaBins, higgsEtaPatches = plt.hist(higgsEtaData, bins=100, histtype="step") #"higgs eta distribution", 100, -10, +10)
+higgsEtaN, higgsEtaBins, higgsEtaPatches = higgsEtaPlot.hist(higgsEtaData, bins=100, histtype="step") #"higgs eta distribution", 100, -10, +10)
 ''' Histogram with the Cumulative eta distribution of both EW bosons'''
-ewBosonEtaN, ewBosonEtaBins, ewBosonEtaPatches = plt.hist(ewBosonEtaData, bins=100, histtype="step") #"EW Boson eta distribution", 100, -10, +10)
+ewBosonEtaN, ewBosonEtaBins, ewBosonEtaPatches = ewBosonEtaPlot.hist(ewBosonEtaData, bins=100, histtype="step") #"EW Boson eta distribution", 100, -10, +10)
 ''' Histogram with the Cumulative eta distribution of both charged leptons'''
-chargedLeptonEtaN, chargedLeptonEtaBins, chargedLeptonEtaPatches = plt.hist(chargedLeptonEtaData, bins=100, histtype="step") #"Charged leptons eta distribution", 100, -10, +10)
+chargedLeptonEtaN, chargedLeptonEtaBins, chargedLeptonEtaPatches = chargedLeptonEtaPlot.hist(chargedLeptonEtaData, bins=100, histtype="step") #"Charged leptons eta distribution", 100, -10, +10)
 ''' Histogram with the Phi distribution of the Higgs bosons'''
-higgsPhiN, higgsPhiBins, higgsPhiPatches = plt.hist(higgsPhiData, bins=100, histtype="step") #"Higgs phi distribution", 110, -3.30, +3.30)
+higgsPhiN, higgsPhiBins, higgsPhiPatches = higgsPhiPlot.hist(higgsPhiData, bins=100, histtype="step") #"Higgs phi distribution", 110, -3.30, +3.30)
 ''' Histogram with the Cumulative phi distribution of both EW bosons'''
-ewBosonPhiN, ewBosonPhiBins, ewBosonPhiPatches = plt.hist(ewBosonPhiData, bins=100, histtype="step") #"EW Boson phi distribution", 110, -3.30, +3.30)
+ewBosonPhiN, ewBosonPhiBins, ewBosonPhiPatches = ewBosonPhiPlot.hist(ewBosonPhiData, bins=100, histtype="step") #"EW Boson phi distribution", 110, -3.30, +3.30)
 ''' Histogram with the Cumulative phi distribution of both charged leptons'''
-chargedLeptonPhiN, chargedLeptonPhiBins, chargedLeptonPhiPatches = plt.hist(chargedLeptonPhiData, bins=100, histtype="step") #"Charged leptons phi distribution", 110, -3.30, +3.30)
+chargedLeptonPhiN, chargedLeptonPhiBins, chargedLeptonPhiPatches = chargedLeptonPhiPlot.hist(chargedLeptonPhiData, bins=100, histtype="step") #"Charged leptons phi distribution", 110, -3.30, +3.30)
+
+higgsPtPlot.set_xlabel("pt [GeV]")
+higgsPtPlot.set_ylabel("Counts")
+higgsPtPlot.set_title("Higgs boson pt distribution")
+higgsPtPlot.grid(True)
+
+ewBosonPtPlot.set_xlabel("pt [GeV]")
+ewBosonPtPlot.set_ylabel("Counts")
+ewBosonPtPlot.set_title("EW bosons pt distribution")
+ewBosonPtPlot.grid(True)
+
+ewBosonLeadingPtPlot.set_xlabel("pt [GeV]")
+ewBosonLeadingPtPlot.set_ylabel("Counts")
+ewBosonLeadingPtPlot.set_title("EW boson leading pt distribution")
+ewBosonLeadingPtPlot.grid(True)
+
+ewBosonSubLeadingPtPlot.set_xlabel("pt [GeV]")
+ewBosonSubLeadingPtPlot.set_ylabel("Counts")
+ewBosonSubLeadingPtPlot.set_title("EW Boson sub-leading pt distribution")
+ewBosonSubLeadingPtPlot.grid(True)
+
+ewBoson1PtPlot.set_xlabel("pt [GeV]")
+ewBoson1PtPlot.set_ylabel("Counts")
+ewBoson1PtPlot.set_title("EW Boson pt distribution")
+ewBoson1PtPlot.grid(True)
+
+ewBoson2PtPlot.set_xlabel("pt [GeV]")
+ewBoson2PtPlot.set_ylabel("Counts")
+ewBoson2PtPlot.set_title("EW Boson pt distribution")
+ewBoson2PtPlot.grid(True)
+
+chargedLeptonPtPlot.set_xlabel("pt [GeV]")
+chargedLeptonPtPlot.set_ylabel("Counts")
+chargedLeptonPtPlot.set_title("Charged leptons pt distribution")
+chargedLeptonPtPlot.grid(True)
+
+neutralLeptonPtPlot.set_xlabel("pt [GeV]")
+neutralLeptonPtPlot.set_ylabel("Counts")
+neutralLeptonPtPlot.set_title("Neutral leptons pt distribution")
+neutralLeptonPtPlot.grid(True)
+
+lepton1PtPlot.set_xlabel("pt [GeV]")
+lepton1PtPlot.set_ylabel("Counts")
+lepton1PtPlot.set_title("Lepton 1 pt distribution")
+lepton1PtPlot.grid(True)
+
+lepton2PtPlot.set_xlabel("pt [GeV]")
+lepton2PtPlot.set_ylabel("Counts")
+lepton2PtPlot.set_title("Lepton 2 pt distribution")
+lepton2PtPlot.grid(True)
+
+lepton3PtPlot.set_xlabel("pt [GeV]")
+lepton3PtPlot.set_ylabel("Counts")
+lepton3PtPlot.set_title("Lepton 3 pt distribution")
+lepton3PtPlot.grid(True)
+
+lepton4PtPlot.set_xlabel("pt [GeV]")
+lepton4PtPlot.set_ylabel("Counts")
+lepton4PtPlot.set_title("Lepton 4 pt distribution")
+lepton4PtPlot.grid(True)
+
+higgsEtaPlot.set_xlabel("$\eta$")
+higgsEtaPlot.set_ylabel("Counts")
+higgsEtaPlot.set_title("Higgs boson $\eta$ distribution")
+higgsEtaPlot.grid(True)
+
+ewBosonEtaPlot.set_xlabel("$\eta$")
+ewBosonEtaPlot.set_ylabel("Counts")
+ewBosonEtaPlot.set_title("EW bosons $\eta$ distribution")
+ewBosonEtaPlot.grid(True)
+
+chargedLeptonEtaPlot.set_xlabel("$\eta$")
+chargedLeptonEtaPlot.set_ylabel("Counts")
+chargedLeptonEtaPlot.set_title("Charged leptons $\eta$ distribution")
+chargedLeptonEtaPlot.grid(True)
+
+higgsPhiPlot.set_xlabel("$\phi$")
+higgsPhiPlot.set_ylabel("Counts")
+higgsPhiPlot.set_title("Higgs boson $\phi$ distribution")
+higgsPhiPlot.grid(True)
+
+ewBosonPhiPlot.set_xlabel("$\phi$")
+ewBosonPhiPlot.set_ylabel("Counts")
+ewBosonPhiPlot.set_title("EW bosons $\phi$ distribution")
+ewBosonPhiPlot.grid(True)
+
+chargedLeptonPhiPlot.set_xlabel("$\phi$")
+chargedLeptonPhiPlot.set_ylabel("Counts")
+chargedLeptonPhiPlot.set_title("Charged leptons $\phi$ distribution")
+chargedLeptonPhiPlot.grid(True)
+
+plt.show()
+
+
+'''
 
 canvas.SetLogy()
 higgsPtHisto.Draw()
@@ -307,3 +405,5 @@ canvas.Print(argv[1] + "_decayPhiHisto.png", "png")
 chargedLeptonPhiHisto.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_ChargedLeptonPhiHisto.png", "png")
+
+'''
