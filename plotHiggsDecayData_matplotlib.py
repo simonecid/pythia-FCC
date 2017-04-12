@@ -18,7 +18,7 @@ higgsDecaysTree = higgsFile.Get("higgsDecays")
 
 numberOfEntries = higgsDecaysTree.GetEntries()
 
-# ---- Preparing data container structures
+# ---- Preparing data container structures ----
 
 ''' Array with the pt distribution of the Higgs bosons'''
 higgsPtData = []
