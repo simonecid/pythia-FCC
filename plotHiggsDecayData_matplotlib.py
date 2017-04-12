@@ -2,9 +2,6 @@
 
 from ROOT import TFile
 from ROOT import TTree
-from ROOT import TH1I
-from ROOT import TCanvas
-from ROOT import TLegend
 from math import sqrt
 from math import hypot
 from sys import argv
@@ -194,18 +191,18 @@ ewBosonLeadingPtPlot.hist(ewBosonLeadingPtData, bins=100, histtype="step")
 ewBosonSubLeadingPtPlot.hist(ewBosonSubLeadingPtData, bins=100, histtype="step")
 
 # EW Boson 1 +  EW Boson 2 + Total
-ewBosonsPtPlot.hist(ewBoson1PtData, bins=100, histtype="step", label="EW Boson 1", alpha=0.5)
-ewBosonsPtPlot.hist(ewBoson2PtData, bins=100, histtype="step", label="EW Boson 2", alpha=0.5)
-ewBosonsPtPlot.hist(ewBosonPtData, bins=100, histtype="step", label="EW Boson 1 + 2", alpha=0.5)
+ewBosonsPtPlot.hist(ewBoson1PtData, bins=100, histtype="step", label="EW Boson 1")
+ewBosonsPtPlot.hist(ewBoson2PtData, bins=100, histtype="step", label="EW Boson 2")
+ewBosonsPtPlot.hist(ewBosonPtData, bins=100, histtype="step", label="EW Boson 1 + 2")
 
 chargedLeptonPtN, chargedLeptonPtBins, chargedLeptonPtPatches = chargedLeptonPtPlot.hist(chargedLeptonPtData, bins=100, histtype="step") 
 neutralLeptonPtN, neutralLeptonPtBins, neutralLeptonPtPatches = neutralLeptonPtPlot.hist(neutralLeptonPtData, bins=100, histtype="step") 
 
 # Four leptons
-leptonsPtPlot.hist(lepton1PtData, bins=100, histtype="step", alpha=0.5, label="Lepton 1") 
-leptonsPtPlot.hist(lepton2PtData, bins=100, histtype="step", alpha=0.5, label="Lepton 2") 
-leptonsPtPlot.hist(lepton3PtData, bins=100, histtype="step", alpha=0.5, label="Lepton 3") 
-leptonsPtPlot.hist(lepton4PtData, bins=100, histtype="step", alpha=0.5, label="Lepton 4") 
+leptonsPtPlot.hist(lepton1PtData, bins=100, histtype="step", label="Lepton 1") 
+leptonsPtPlot.hist(lepton2PtData, bins=100, histtype="step", label="Lepton 2") 
+leptonsPtPlot.hist(lepton3PtData, bins=100, histtype="step", label="Lepton 3") 
+leptonsPtPlot.hist(lepton4PtData, bins=100, histtype="step", label="Lepton 4") 
 
 # Eta stuff
 higgsEtaPlot.hist(higgsEtaData, bins=100, histtype="step")
