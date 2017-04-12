@@ -148,7 +148,7 @@ for eventIndex in xrange(0, numberOfEntries):
   if isLepton4Charged : chargedLeptonPhiData.append(lepton4Phi)
 
 
-# ---- Creating canvases (window), and plot objects ----
+# ---- Creating canvases (window) and plot objects ----
 
 higgsPtCanvas = plt.figure()
 ''' Histogram with the pt distribution of the Higgs bosons'''
