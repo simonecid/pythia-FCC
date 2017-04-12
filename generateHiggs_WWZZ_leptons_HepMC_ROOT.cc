@@ -24,7 +24,6 @@ int main(int argc, char * argv[])
 
   // -c -> command file
   // -o -> ID for unique output identification
-  // -r -> higgsId (absolute value will be taken)
   // -n -> number of events to generate (facultative)
 
   std::string cmndFileName;
