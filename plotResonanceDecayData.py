@@ -1,3 +1,8 @@
+'''Plots various stuff from the resonance to two product decays.
+Receives the name of the root file without extension as an input.
+'''
+
+
 from ROOT import TFile
 from ROOT import TTree
 from ROOT import TH1I
@@ -10,6 +15,8 @@ from sys import argv
 fileName = argv[1]
 resonanceFile = TFile(argv[1] + ".root")
 resonanceDecaysTree = resonanceFile.Get("resonanceDecays")
+
+outputFile = TFile(argv[1] + "_plots" + ".root", "RECREATE")
 
 numberOfEntries = resonanceDecaysTree.GetEntries()
 
@@ -70,15 +77,19 @@ canvas.SetWindowSize(1024, 768)
 
 canvas.SetLogy()
 resonancePtHisto.Draw()
+resonancePtHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_resonancePtHisto.png", "png")
 decayPtHisto.Draw()
+decayPtHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_decayPtHisto.png", "png")
 decayLeadingPtHisto.Draw()
+decayLeadingPtHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_decayLeadingPtHisto.png", "png")
 decaySubLeadingPtHisto.Draw()
+decaySubLeadingPtHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_decaySubLeadingPtHisto.png", "png")
 
@@ -87,8 +98,11 @@ canvas.Print(argv[1] + "_decaySubLeadingPtHisto.png", "png")
 decayLeadingPtHisto.SetLineColor(2)
 decaySubLeadingPtHisto.SetLineColor(3)
 decayPtHisto.Draw()
+decayPtHisto.Write()
 decayLeadingPtHisto.Draw("SAME")
+decayLeadingPtHisto.Write()
 decaySubLeadingPtHisto.Draw("SAME")
+decaySubLeadingPtHisto.Write()
 leg = TLegend(0.7,0.7,0.48,0.9)
 leg.SetHeader("Momentum distribution")
 leg.AddEntry(decayPtHisto,"Leading+sub-leading","l")
@@ -99,15 +113,21 @@ canvas.Update()
 canvas.Print(argv[1] + "_ptHistogramComparison.png", "png")
 
 resonanceEtaHisto.Draw()
+resonanceEtaHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_resonanceEtaHisto.png", "png")
 decayEtaHisto.Draw()
+decayEtaHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_decayEtaHisto.png", "png")
 
 resonancePhiHisto.Draw()
+resonancePhiHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_resonancePhiHisto.png", "png")
 decayPhiHisto.Draw()
+decayPhiHisto.Write()
 canvas.Update()
 canvas.Print(argv[1] + "_decayPhiHisto.png", "png")
+
+outputFile.Close()
