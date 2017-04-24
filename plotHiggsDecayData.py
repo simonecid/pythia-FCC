@@ -39,6 +39,8 @@ lepton2PtHisto = TH1I("lepton2PtHisto", "Lepton 2 pt distribution", 100, 0, 500)
 lepton3PtHisto = TH1I("lepton3PtHisto", "Lepton 3 pt distribution", 100, 0, 500)
 '''Plot of the distribution of the pt of a lepton'''
 lepton4PtHisto = TH1I("lepton4PtHisto", "Lepton 4 pt distribution", 100, 0, 500)
+'''Plot of the distribution of the leading pt of the four leptons'''
+leadingChargedLeptonPtHisto = TH1I("leadingChargedLeptonPtHisto", "Lepton leading pt distribution", 100, 0, 500)
 
 
 
@@ -48,6 +50,8 @@ higgsEtaHisto = TH1I("higgsEtaHisto", "higgs eta distribution", 100, -10, +10)
 ewBosonEtaHisto = TH1I("ewBosonEtaHisto", "EW Boson eta distribution", 100, -10, +10)
 '''Cumulative eta distribution of both charged leptons'''
 chargedLeptonEtaHisto = TH1I("chargedLeptonEtaHisto", "Charged leptons eta distribution", 100, -10, +10)
+'''Distribution of eta of the leading pt leptons'''
+chargedLeptonLeadingEtaHisto = TH1I("chargedLeptonLeadingEtaHisto", "Leading pt lepton eta distribution", 100, -10, +10)
 
 
 
@@ -57,6 +61,9 @@ higgsPhiHisto = TH1I("higgsPhiHisto", "Higgs phi distribution", 110, -3.30, +3.3
 ewBosonPhiHisto = TH1I("ewBosonPhiHisto", "EW Boson phi distribution", 110, -3.30, +3.30)
 '''Cumulative phi distribution of both charged leptons'''
 chargedLeptonPhiHisto = TH1I("chargedLeptonPhiHisto", "Charged leptons phi distribution", 110, -3.30, +3.30)
+
+chargedLeptonsPDGID = [11, 13, 15, -11, -13, -15]
+neutralLeptonsPDGID = [12, 14, 16, -12, -14, -16]
 
 for eventIndex in xrange(0, numberOfEntries):
   higgsDecaysTree.GetEntry(eventIndex)
@@ -100,11 +107,13 @@ for eventIndex in xrange(0, numberOfEntries):
   lepton4PDGID = higgsDecaysTree.lepton4PDGID
 
   # Checking if charged lepton
-  chargedLeptonsPDGID = [11, 13, 15]
   isLepton1Charged = lepton1PDGID in chargedLeptonsPDGID
   isLepton2Charged = lepton2PDGID in chargedLeptonsPDGID
   isLepton3Charged = lepton3PDGID in chargedLeptonsPDGID
   isLepton4Charged = lepton4PDGID in chargedLeptonsPDGID
+
+  leadingChargedLeptonPt = 0
+  leadingChargedLeptonPt_Eta = 0
 
   # Filling the histogram
 
@@ -119,14 +128,35 @@ for eventIndex in xrange(0, numberOfEntries):
   lepton2PtHisto.Fill(lepton2Pt)
   lepton3PtHisto.Fill(lepton3Pt)
   lepton4PtHisto.Fill(lepton4Pt)
-  if isLepton1Charged : chargedLeptonPtHisto.Fill(lepton1Pt)
-  if isLepton2Charged : chargedLeptonPtHisto.Fill(lepton2Pt)
-  if isLepton3Charged : chargedLeptonPtHisto.Fill(lepton3Pt)
-  if isLepton4Charged : chargedLeptonPtHisto.Fill(lepton4Pt)
+  
+  if isLepton1Charged : 
+    chargedLeptonPtHisto.Fill(lepton1Pt)
+    leadingChargedLeptonPt = lepton1Pt
+    leadingChargedLeptonPt_Eta = lepton1Eta
+  if isLepton2Charged : 
+    chargedLeptonPtHisto.Fill(lepton2Pt)
+    if lepton2Pt > leadingChargedLeptonPt :
+      leadingChargedLeptonPt = lepton2Pt
+      leadingChargedLeptonPt_Eta = lepton2Eta
+  if isLepton3Charged : 
+    chargedLeptonPtHisto.Fill(lepton3Pt)
+    if lepton3Pt > leadingChargedLeptonPt :
+      leadingChargedLeptonPt = lepton3Pt
+      leadingChargedLeptonPt_Eta = lepton3Eta
+  if isLepton4Charged : 
+    chargedLeptonPtHisto.Fill(lepton4Pt)
+    if lepton4Pt > leadingChargedLeptonPt :
+      leadingChargedLeptonPt = lepton4Pt
+      leadingChargedLeptonPt_Eta = lepton4Eta
+
   if not isLepton1Charged : neutralLeptonPtHisto.Fill(lepton1Pt)
   if not isLepton2Charged : neutralLeptonPtHisto.Fill(lepton2Pt)
   if not isLepton3Charged : neutralLeptonPtHisto.Fill(lepton3Pt)
   if not isLepton4Charged : neutralLeptonPtHisto.Fill(lepton4Pt)
+
+  if leadingChargedLeptonPt > 0:
+    leadingChargedLeptonPtHisto.Fill(leadingChargedLeptonPt)
+    chargedLeptonLeadingEtaHisto.Fill(leadingChargedLeptonPt_Eta)
   
   higgsEtaHisto.Fill(higgsEta)
   ewBosonEtaHisto.Fill(ewBoson1Eta)
@@ -219,6 +249,13 @@ leg3.AddEntry(lepton4PtHisto,"Lepton 4","l")
 leg3.Draw()
 canvas.Update()
 canvas.Print(argv[1] + "_LeptonPtHistogramComparison.png", "png")
+
+leadingChargedLeptonPtHisto.Draw()
+canvas.Update()
+canvas.Print(argv[1] + "_LeadingChargedLeptonPtHisto.png", "png")
+chargedLeptonLeadingEtaHisto.Draw()
+canvas.Update()
+canvas.Print(argv[1] + "_LeadingChargedLeptonEtaHisto.png", "png")
 
 # Eta distributions
 higgsEtaHisto.Draw()
