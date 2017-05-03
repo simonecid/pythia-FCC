@@ -13,7 +13,7 @@ when_to_transfer_output = ON_EXIT_OR_EVICT
 # transfer_input_files	=	ffZee.cmnd
 
 request_cpus = 1
-request_memory=1
+request_memory=100
 request_disk=100000
 
 queue 1
