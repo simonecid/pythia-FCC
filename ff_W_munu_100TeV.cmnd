@@ -19,12 +19,15 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Beam parameter settings. Values below agree with default ones.
 Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
 Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:eCM = 14000.                ! CM energy of collision
+Beams:eCM = 100000.                ! CM energy of collision
 
-! 4) Turning on Z generation
+! 4) Turning on W generation
 
-WeakZ0:gmZmode = 2
-WeakSingleBoson:ffbar2gmZ = on
-23:oneChannel = 1 1 0 11 -11
-PhaseSpace:mHatMin = 60.
-PhaseSpace:mHatMax = 120.
+WeakSingleBoson:ffbar2W = on
+
+! W+ -> mu+ + nu_mu
+24:oneChannel = 1 1 0 -13 14
+! W- -> mu- + antinu_mu
+-24:oneChannel = 1 1 0 13 -14
+PhaseSpace:mHatMin = 50.
+PhaseSpace:mHatMax = 110.

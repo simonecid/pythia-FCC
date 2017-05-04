@@ -5,7 +5,7 @@
 ! The settings here are illustrative, not always physics-motivated.
 
 ! 1) Settings used in the main program.
-Main:numberOfEvents = 100         ! number of events to generate
+Main:numberOfEvents = 1000         ! number of events to generate
 Main:timesAllowErrors = 3          ! how many aborts before run stops
 
 ! 2) Settings related to output in init(), next() and stat().
@@ -19,24 +19,13 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Beam parameter settings. Values below agree with default ones.
 Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
 Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:eCM = 14000.                ! CM energy of collision
+Beams:eCM = 100000.                ! CM energy of collision
 
 ! 4) Turning on Z generation
 
-HiggsSM:all = on
+WeakZ0:gmZmode = 2
 
-! H -> W+ W-
-25:oneChannel = 1 1 0 -24 +24
-! W+ -> e+ nu_e
-24:oneChannel = 1 1 0 -11 12
-! W- -> e- antinu_e
--24:oneChannel = 1 1 0 11 -12
-
-! No phase space cuts
-PhaseSpace:mHatMin = 4.
-PhaseSpace:mHatMax = -1.
-
-! 5) Random number generation setup
-
-Random:setSeed = on
-Random:seed = 0
+WeakSingleBoson:ffbar2gmZ = on
+23:oneChannel = 1 1 0 13 -13
+PhaseSpace:mHatMin = 60.
+PhaseSpace:mHatMax = 120.

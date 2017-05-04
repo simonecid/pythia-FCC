@@ -19,13 +19,22 @@ Next:numberShowEvent = 0           ! print event record n times
 ! 3) Beam parameter settings. Values below agree with default ones.
 Beams:idA = 2212                   ! first beam, p = 2212, pbar = -2212
 Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
-Beams:eCM = 14000.                ! CM energy of collision
+Beams:eCM = 100000.                ! CM energy of collision
 
 ! 4) Turning on Z generation
 
-WeakZ0:gmZmode = 2
+HiggsSM:all = on
 
-WeakSingleBoson:ffbar2gmZ = on
-23:oneChannel = 1 1 0 15 -15
-PhaseSpace:mHatMin = 60.
-PhaseSpace:mHatMax = 120.
+! H -> Z0 Z0
+25:oneChannel = 1 1 0 23 23
+! Z0 -> e+ e-
+23:oneChannel = 1 1 0 -11 11
+
+! No phase space cuts
+PhaseSpace:mHatMin = 4.
+PhaseSpace:mHatMax = -1.
+
+! 5) Random number generation setup
+
+Random:setSeed = on
+Random:seed = 0
