@@ -25,7 +25,8 @@ done
 
 HOMEFOLDER="$(pwd)"
 
-source /software/sb17498/FCCSW/init.sh
+source /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.9/x86_64-slc6/setup.sh
+source /cvmfs/sft.cern.ch/lcg/releases/ROOT/6.08.06-c8fb4/x86_64-slc6-gcc49-opt/bin/thisroot.sh
 
 set -o xtrace
 /software/sb17498/pythia8223/pythia-FCC/generateEventsToHepMC.exe -c ${cmdFileName} -o ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.hepmc -s ${processId} -n ${numEvents}
