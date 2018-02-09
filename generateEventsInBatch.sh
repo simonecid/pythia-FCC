@@ -12,7 +12,7 @@ while getopts "j:c:p:c:n:" o; do
     p)
       processId=${OPTARG}
       ;;  
-    c)
+    i)
       cmdFileName=${OPTARG}
       ;;
     n)
@@ -31,8 +31,7 @@ source /cvmfs/sft.cern.ch/lcg/releases/ROOT/6.08.06-c8fb4/x86_64-slc6-gcc49-opt/
 set -o xtrace
 /software/sb17498/pythia8223/pythia-FCC/generateEventsToHepMC.exe -c ${cmdFileName} -o ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.hepmc -s ${processId} -n ${numEvents}
 
-git clone https://www.github.com/simonecid/delphes
-
+source /software/sb17498/FCCSW/init.sh
 cd /software/sb17498/Delphes_install
 
 ./bin/hepmc2pileup ${jobName}_${clusterId}.${processId}.pileup ${jobName}_${clusterId}.${processId}.hepmc
@@ -40,4 +39,6 @@ cd /software/sb17498/Delphes_install
 
 /usr/bin/hdfs dfs -mkdir -p /FCC-hh/${jobName}
 /usr/bin/hdfs dfs -moveFromLocal ${jobName}_${clusterId}.${processId}.pileup /FCC-hh/${jobName}/
-set +o xtrace
+
+rm ${jobName}_${clusterId}.${processId}.hepmc
+set +o xtrace 
