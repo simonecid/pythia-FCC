@@ -36,11 +36,11 @@ source /software/sb17498/FCCSW/init.sh
 set -o xtrace
 cd /software/sb17498/Delphes_install
 
-./bin/hepmc2pileup ${jobName}_${clusterId}.${processId}.pileup ${jobName}_${clusterId}.${processId}.hepmc
+./bin/hepmc2pileup ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.pileup ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.hepmc
 
 
 /usr/bin/hdfs dfs -mkdir -p /FCC-hh/${jobName}
-/usr/bin/hdfs dfs -moveFromLocal ${jobName}_${clusterId}.${processId}.pileup /FCC-hh/${jobName}/
+/usr/bin/hdfs dfs -moveFromLocal ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.pileup /FCC-hh/${jobName}/
 
-rm ${jobName}_${clusterId}.${processId}.hepmc
+rm ${HOMEFOLDER}/${jobName}_${clusterId}.${processId}.hepmc
 set +o xtrace 
