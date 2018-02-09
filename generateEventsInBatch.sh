@@ -1,7 +1,7 @@
 #!/bin/bash
 # Needs around 7 GB
 
-while getopts "j:c:p:c:n:" o; do
+while getopts "j:c:p:i:n:" o; do
   case "${o}" in
     j)
       jobName=${OPTARG}
