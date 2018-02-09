@@ -22,13 +22,8 @@ Beams:idB = 2212                   ! second beam, p = 2212, pbar = -2212
 Beams:eCM = 14000                  ! CM energy of collision
 
 ! 4) Turning on MinBias
-SoftQCD:nonDiffractive = on
+SoftQCD:all = on
 
 ! 5) Other settings. Can be expanded as desired.
 #Tune:preferLHAPDF = off           ! use internal PDFs when LHAPDF not linked
-Tune:pp = 6                        ! use Tune 4Cx
-ParticleDecays:limitTau0 = on      ! set long-lived particle stable ...
-ParticleDecays:tau0Max = 10        ! ... if c*tau0 > 10 mm
-ParticleDecays:limitCylinder = on
-ParticleDecays:xyMax = 20          ! mm
-ParticleDecays:zMax = 30000        ! mm, (full extent of beampipe)
+Tune:pp = 5                        ! use Tune 5

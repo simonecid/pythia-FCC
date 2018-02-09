@@ -46,7 +46,7 @@ int main(int argc, char * argv[]) {
 
     case 's': {
       std::string seed = argv[optind];
-      std::cout << "seed has been set to " << seed << std::endl;
+      std::cout << "Seed has been set to " << seed << std::endl;
       setSeedCommand.append(seed);
       break;
     }
